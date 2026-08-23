@@ -1,0 +1,15 @@
+# packed from image/0.png .. 11.png by pack_items.ps1 (4x3, 255x255 cells, no padding)
+# frame <name> <x> <y> <w> <h> [<pivotX> <pivotY>]   - texel coordinates, pivot relative to the frame's top-left
+texture image/items_atlas.png
+frame item_00    0    0 255 255  127 255
+frame item_01  255    0 255 255  127 255
+frame item_02  510    0 255 255  127 255
+frame item_03  765    0 255 255  127 255
+frame item_04    0  255 255 255  127 255
+frame item_05  255  255 255 255  127 255
+frame item_06  510  255 255 255  127 255
+frame item_07  765  255 255 255  127 255
+frame item_08    0  510 255 255  127 255
+frame item_09  255  510 255 255  127 255
+frame item_10  510  510 255 255  127 255
+frame item_11  765  510 255 255  127 255

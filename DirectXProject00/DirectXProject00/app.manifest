@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <!--
+    DPI 인식 선언.
+    - dpiAware (asm.v3)   : Windows 8.1 이하용 레거시 키. "true/pm" = 시스템 인식 + Per-Monitor v1.
+    - dpiAwareness (2016) : Windows 10 1607+ 용. 쉼표로 우선순위를 나열하면 OS 가 지원하는 첫 항목을 고른다.
+      PerMonitorV2 를 첫 번째로 두어 비클라이언트 영역(타이틀바/테두리)까지 OS 가 스케일하게 한다.
+
+    [왜 코드(SetProcessDpiAwarenessContext)가 아니라 매니페스트인가]
+      인식 수준은 창을 하나라도 만들기 전에 정해져야 한다. 매니페스트는 프로세스 시작 시점에 적용되어
+      실수로 늦게 호출할 여지가 없고, MS 권장 방식이기도 하다.
+      둘 다 쓰면 매니페스트가 우선하고 함수는 ERROR_ACCESS_DENIED 를 돌려주므로 하나만 쓴다.
+
+    [효과] 이 선언이 없으면(DPI Unaware) 150% 모니터에서 GetClientRect 가 500 을 돌려주고
+      DWM 이 500x500 백버퍼를 1.5 배 비트맵 확대해서 뿌린다 -> 뿌옇다.
+      Per-Monitor 인식에서는 GetClientRect 가 진짜 물리 픽셀 수를 돌려주고, 배율이 다른 모니터로 옮기면 WM_DPICHANGED 가 온다.
+      v2 는 여기에 더해 타이틀바/테두리(비클라이언트 영역)까지 OS 가 스케일해 준다.
+  -->
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true/pm</dpiAware>
+      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2, PerMonitor</dpiAwareness>
+    </windowsSettings>
+  </application>
+</assembly>

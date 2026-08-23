@@ -1,0 +1,23 @@
+# 빌드 산출물
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio 사용자 설정
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# 컴파일 중간 파일
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.log
+*.tlog
+*.idb
